@@ -66,7 +66,7 @@ Capistrano::Configuration.instance(:must_exist).load do
       task :download do
         prepare_dump_folders
         run "mysqldump -u#{application} -p#{db_password} #{application}#{defined?(stage) ? '_'+stage : ''} > #{deploy_to}/db/dump/dump.sql"
-        system "scp #{user}@#{server_ip}:#{deploy_to}/db/dump/dump.sql db/dump"
+        system "scp #{user}@#{server_ip}:#{deploy_to}/db/dump/dump.sql db/dump.sql"
         system "mysql -uroot -p #{application}_development < db/dump.sql"
         clean_dump_folders
       end
